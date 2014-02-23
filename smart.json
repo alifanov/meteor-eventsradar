@@ -1,0 +1,9 @@
+{
+  "packages": {
+    "bootstrap-3": {},
+    "accounts-vk": {},
+    "moment": {},
+    "cron": {},
+    "router": {}
+  }
+}

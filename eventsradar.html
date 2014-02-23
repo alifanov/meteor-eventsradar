@@ -1,0 +1,121 @@
+<head>
+  <title>Events Radar - агрегатор событий в вашей новостной ленте</title>
+</head>
+
+<body>
+  {{> menu}}
+  {{renderPage}}
+</body>
+
+<template name="about">
+    <div class="container">
+        <h1>О проекте</h1>
+        <p>
+            Проект создан с целью упорядочивания информационного шума от ленты в Вконтакте.
+        </p><p>
+            Сервис просматривает стены Ваших друзей и групп, фильтрует посты по наличию упоминаний о событиях и выводит отсортированные данные.
+        </p>
+    </div>
+</template>
+
+<template name="404">
+    <div class="container">
+        <h1>404. Страница не найдена</h1>
+    </div>
+</template>
+
+<template name="contacts">
+    <div class="container">
+        <h1>
+            Контакты
+        </h1>
+        <p>
+            Автор и разработчик: <a href="https://vk.com/lifanov">Александр Лифанов</a>
+        </p>
+    </div>
+</template>
+
+<template name="greet">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Events Radar</h1>
+            <p>
+                Система поиска событий в вашей новостной ленте ВКонтакте
+            </p>
+            <small style="font-size: 15px;">
+                <p style="font-size: 15px;">
+                    Иногда хочется куда-то сходить, но не знаешь куда.
+                    Можно поискать информацию на порталах типа Афиши, KudaGo и т.д., но иногда там только круные мероприятия.
+                    Можно обратиться к пабликам, но опять же там слишком много информации и постов не интересных Вам.
+                    Наконец можно обратиться к друзям и почитать их стены, но как отфильтровать всю не нужную информацию ?
+                </p>
+                <p style="font-size: 15px;">
+                    Events Radar как раз для этого и предназначен: поиск событий по друзям и группам, с фильтрацией по дате и сету проведения.
+                    Теперь Вам понадобится всего несколько минут, чтобы найти нтересное мероприятие на вечер.
+                </p>
+            </small>
+            <p><a href="" class="btn btn-primary btn-lg auth" role="button">Найти планы на вечер</a></p>
+        </div>
+    </div>
+
+</template>
+
+<template name="menu">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Events Radar</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/about/">О проекте</a>
+                    </li>
+                    <li>
+                        <a href="/contacts/">Контакты</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {{#if user}}
+                    <li>
+                        <a href="" class="">{{user.services.vk.first_name}} {{user.services.vk.last_name}}</a>
+                    </li>
+                    {{else}}
+                    <li>
+                        <a href="" class="auth">Авторизоваться в VK.com</a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</template>
+
+<template name="home">
+    <div class="container">
+        <h3 class="pull-left" style="margin-top: 15px;">Все новости</h3>
+        <div class="btn-group pull-right">
+            <a href="javascript: return false;"
+               class="btn btn-default today">Сегодня</a>
+            <a href="javascript: return false;"
+               class="btn btn-default tomorrow">Завтра</a>
+            <a href="javascript: return false;"
+               class="btn btn-default week">На неделе</a>
+            <a href="javascript: return false;"
+               class="btn btn-default month">За 30 дней</a>
+        </div>
+        <div class="clearfix"></div>
+        <hr />
+        {{#each posts}}
+            <div class="panel panel-primary date-{{ formatDate this.date 'simple' }}">
+                <div class="panel-heading">[{{ formatDate this.date "short" }}] {{ this.source }}</div>
+                <div class="panel-body">
+                    {{{ this.text }}}
+                </div>
+                <div class="panel-footer">
+                    <a target="_blank" href="{{ this.link }}">Подробнее &rarr;</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</template>
