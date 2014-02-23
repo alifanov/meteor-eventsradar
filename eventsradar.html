@@ -93,7 +93,6 @@
 
 <template name="home">
     <div class="container">
-        <h3 class="pull-left" style="margin-top: 15px;">Все новости</h3>
         <div class="btn-group pull-right">
             <a href="javascript: return false;"
                class="btn btn-default today">Сегодня</a>
@@ -104,8 +103,7 @@
             <a href="javascript: return false;"
                class="btn btn-default month">За 30 дней</a>
         </div>
-        <div class="clearfix"></div>
-        <hr />
+        <div class="clearfix" style="margin-bottom: 20px;"></div>
         {{#each posts}}
             <div class="panel panel-primary date-{{ formatDate this.date 'simple' }}">
                 <div class="panel-heading">[{{ formatDate this.date "short" }}] {{ this.source }}</div>

@@ -157,7 +157,7 @@ if (Meteor.isClient) {
     {
         filter = {
             user: Meteor.user().services.vk.id,
-            date: {$lte: today}
+            date: {$lt: today}
         }
     }
     Template.home.posts = function(){
@@ -186,12 +186,23 @@ if (Meteor.isClient) {
         date_arr = eliminateDuplicates(date_arr);
         $.each(date_arr, function(i, v){
             $('.'+v).wrapAll('<div class="group-date group-' + v+'"></div>');
-            $(".group-"+v).prepend('<div class="slide-group"><a href="#">'+ v.split('date-')[1] +'</a></div><hr />');
+            $(".group-"+v).prepend('<div class="slide-group"><a href="#">'+ v.split('date-')[1] +'</a>' +
+                '<a href="#"><span class="pull-right glyphicon glyphicon-chevron-up"></span></a></div><hr />');
         });
         $(".slide-group a").toggle(function(){
             $(this).parents('.group-date').eq(0).find('.panel').fadeOut(600);
+            var arrow = $(this).parents('.slide-group').eq(0).find('a span.glyphicon');
+            if(arrow.hasClass('glyphicon-chevron-up')){
+                arrow.removeClass('glyphicon-chevron-up');
+                arrow.addClass('glyphicon-chevron-down');
+            }
         }, function(){
             $(this).closest('.group-date').eq(0).find('.panel').fadeIn(600);
+            var arrow = $(this).parents('.slide-group').eq(0).find('a span.glyphicon');
+            if(arrow.hasClass('glyphicon-chevron-down')){
+                arrow.removeClass('glyphicon-chevron-down');
+                arrow.addClass('glyphicon-chevron-up');
+            }
         });
     };
 
