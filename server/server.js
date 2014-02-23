@@ -199,8 +199,8 @@ if (Meteor.isServer) {
 
         Accounts.loginServiceConfiguration.insert({
             service: 'vk',
-            appId:   '4149541',      // Your app id
-            secret:  'pPGdZM2rVbNySaTBfooe' // Your app secret
+            appId:   '4153565',      // Your app id
+            secret:  'ISesX7e7xits6EyMU9Vz' // Your app secret
         });
     });
 }
